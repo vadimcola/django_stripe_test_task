@@ -27,7 +27,11 @@ class Order(models.Model):
 
 
 class Discount(models.Model):
+    name_discount = models.CharField(max_length=100, verbose_name='Наименование скидки')
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Сумма скидки')
+
+    def __str__(self):
+        return f'{self.name_discount}'
 
     class Meta:
         verbose_name = 'Скидка'
@@ -35,7 +39,11 @@ class Discount(models.Model):
 
 
 class Tax(models.Model):
+    name_tax = models.CharField(max_length=100, verbose_name='Наименование налога')
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Сумма налога')
+
+    def __str__(self):
+        return f'{self.name_tax}'
 
     class Meta:
         verbose_name = 'Налог'
