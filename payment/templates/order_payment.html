@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ордер на оплату</title>
+</head>
+<body>
+    <h1>Ордер на оплату</h1>
+    <h2>Список продуктов:</h2>
+    <ul>
+        {% for item in order.items.all %}
+            <li>{{ item.name }} - {{ item.price }} руб.</li>
+        {% endfor %}
+    </ul>
+    {% if total|floatformat:2|slice:'-2:' == '00' %}
+    <h3>Общая сумма оплаты: {{ total|floatformat:0 }} руб.</h3>
+    {% else %}
+    <h3>Общая сумма оплаты: {{ total|floatformat:0 }} руб. {{ total|floatformat:2|slice:'-2:' }} коп.</h3>
+    {% endif %}
+    <a href="{{ payment_link }}">Оплатить</a>
+</body>
+</html>

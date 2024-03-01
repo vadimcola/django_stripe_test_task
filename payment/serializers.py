@@ -6,8 +6,7 @@ from payment.models import Order
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    total_order = serializers.SerializerMethodField()
-    payment_link = serializers.SerializerMethodField()
+    payment_id = serializers.SerializerMethodField()
 
     def get_total_order(self, obj):
         total_price = sum(item.price for item in obj.items.all())
@@ -20,7 +19,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
         return total_price
 
-    def get_payment_link(self, obj):
+    def get_payment_id(self, obj):
         stripe.api_key = STRIPE_API_KEY
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -38,8 +37,8 @@ class OrderSerializer(serializers.ModelSerializer):
             success_url='https://example.com/success',
             cancel_url='https://example.com/cancel',
         )
-        return session.url
+        return session.id
 
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['payment_id']
