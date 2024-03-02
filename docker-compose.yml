@@ -1,0 +1,41 @@
+version: '3'
+services:
+
+  db:
+    image: postgres
+    container_name: postgres_app
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - pg_data:/var/lib/postgresql/data/pgdata
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+  app:
+    build: .
+    container_name: app_container
+    tty: true
+    command: bash -c "python manage.py migrate && python manage.py add_su && python manage.py loaddata data.json && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD-SHELL", "python manage.py showmigrations" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+volumes:
+  pg_data:

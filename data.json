@@ -1,0 +1,117 @@
+[
+  {
+    "model": "payment.item",
+    "pk": 1,
+    "fields": {
+      "name": "Телевизор",
+      "description": "Телевизор LG",
+      "price": "20000.00"
+    }
+  },
+  {
+    "model": "payment.item",
+    "pk": 2,
+    "fields": {
+      "name": "Холодильник",
+      "description": "Холодильник \"Бирюса\"",
+      "price": "15000.00"
+    }
+  },
+  {
+    "model": "payment.item",
+    "pk": 3,
+    "fields": {
+      "name": "Газовая плита",
+      "description": "Газовая плита Брест",
+      "price": "10000.00"
+    }
+  },
+  {
+    "model": "payment.order",
+    "pk": 1,
+    "fields": {
+      "discount": 2,
+      "tax": null,
+      "items": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "payment.order",
+    "pk": 2,
+    "fields": {
+      "discount": null,
+      "tax": null,
+      "items": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "payment.order",
+    "pk": 3,
+    "fields": {
+      "discount": 3,
+      "tax": 2,
+      "items": [
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "payment.order",
+    "pk": 4,
+    "fields": {
+      "discount": null,
+      "tax": 1,
+      "items": [
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "payment.discount",
+    "pk": 1,
+    "fields": {
+      "name_discount": "Скидка 2%",
+      "amount": "2.00"
+    }
+  },
+  {
+    "model": "payment.discount",
+    "pk": 2,
+    "fields": {
+      "name_discount": "Скидка 5%",
+      "amount": "5.00"
+    }
+  },
+  {
+    "model": "payment.discount",
+    "pk": 3,
+    "fields": {
+      "name_discount": "Скидка 10%",
+      "amount": "10.00"
+    }
+  },
+  {
+    "model": "payment.tax",
+    "pk": 1,
+    "fields": {
+      "name_tax": "Налог 10%",
+      "amount": "10.00"
+    }
+  },
+  {
+    "model": "payment.tax",
+    "pk": 2,
+    "fields": {
+      "name_tax": "Налог 20%",
+      "amount": "20.00"
+    }
+  }
+]

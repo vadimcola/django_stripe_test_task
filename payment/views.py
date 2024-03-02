@@ -19,6 +19,5 @@ class OrderDetailView(DetailView):
         total = get_total_order(self.object)
         payment_link = get_payment_link(self.object)
         context['total'] = total
-        print(type(total))
         context['payment_link'] = payment_link
         return context
